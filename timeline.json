@@ -1,0 +1,392 @@
+{
+  "fps": 30,
+  "totalDurationSeconds": 480,
+  "totalDurationFrames": 14400,
+  "note": "This file is the single source of truth for scene timing. src/timeline.ts imports this directly. Edit start/end seconds here to retime the whole video - frames are derived automatically, but are also listed for human reference. moodProgress (0 = bleakest/grayest, 1 = brightest/most hopeful) drives color grading in src/utils/colors.ts and is interpolated smoothly across the whole timeline, not just at scene cuts.",
+  "scenes": [
+    {
+      "id": "intro_room",
+      "order": 1,
+      "startSeconds": 0,
+      "endSeconds": 15,
+      "startFrame": 0,
+      "endFrame": 450,
+      "component": "Scene01_IntroRoom",
+      "moodRange": [0.0, 0.02],
+      "voReference": "You can get your life together at any age. But first, you have to stop waiting for life to feel easy.",
+      "visualDescription": "Stick figure sits slumped on the floor of a messy, gray room. A phone glows nearby on the floor. A wall clock's hands spin unnaturally fast. Character's head droops with exhaustion.",
+      "animationCues": [
+        "Camera: slow push-in, 0 to 5% scale over the full scene",
+        "StickFigure pose: 'slumpedFloor' held with a slow idle breathing loop",
+        "PhoneDistraction: low pulsing glow, glowIntensity 0.3-0.5",
+        "Clock hands: continuous fast rotation, 2 full turns over scene",
+        "Clutter: 4-5 static messy shapes (crumpled paper, box, clothes pile)"
+      ]
+    },
+    {
+      "id": "shadow_excuses",
+      "order": 2,
+      "startSeconds": 15,
+      "endSeconds": 35,
+      "startFrame": 450,
+      "endFrame": 1050,
+      "component": "Scene02_ShadowExcuses",
+      "moodRange": [0.02, 0.03],
+      "voReference": "Most people don't fail because they're lazy. They fail because every problem in their life feels too big to touch.",
+      "visualDescription": "Six tall dark shadow shapes rise from the floor around the seated character, each a distinct silhouette icon: a coin-with-crack (money), a cracked-mirror shard (body insecurity), a broken-heart (heartbreak), a tangle-of-arrows (no direction), a melting-clock (no time), a storm-cloud-with-knot (mental overwhelm).",
+      "animationCues": [
+        "ShadowExcuse x6: staggered rise-up animation, each starting 1.5s after the previous (spring, damping 14)",
+        "Shadows scale from 0 to full height, growing taller than the stick figure",
+        "Character pose: 'slumpedFloor', tilts head up slightly to track each shadow as it rises",
+        "Camera: slow orbit-style pan left-to-right across the row of shadows"
+      ]
+    },
+    {
+      "id": "freeze_scroll",
+      "order": 3,
+      "startSeconds": 35,
+      "endSeconds": 55,
+      "startFrame": 1050,
+      "endFrame": 1650,
+      "component": "Scene03_FreezeAndScroll",
+      "moodRange": [0.03, 0.04],
+      "voReference": "So they freeze. They scroll. They sleep late. They tell themselves they'll start when they feel ready.",
+      "visualDescription": "Character reaches out and picks up the glowing phone, then lies back down. Through the window behind the character, the light cycles rapidly from day to night to day, showing time passing while nothing changes.",
+      "animationCues": [
+        "StickFigure pose interpolation: 'slumpedFloor' -> 'reachForPhone' -> 'lyingDown', eased with Easing.inOut(Easing.cubic)",
+        "PhoneDistraction: glowIntensity ramps up to 1.0 once held, soft flicker loop",
+        "Window light cycle: background rectangle hue/brightness loops through 4 day/night cycles using interpolate with extrapolateRight clamp",
+        "Shadows from previous scene fade to 20% opacity in background, not gone, just dimmed"
+      ]
+    },
+    {
+      "id": "spark_stand",
+      "order": 4,
+      "startSeconds": 55,
+      "endSeconds": 75,
+      "startFrame": 1650,
+      "endFrame": 2250,
+      "component": "Scene04_SparkAndStand",
+      "moodRange": [0.04, 0.08],
+      "voReference": "But ready is a trap. Confidence doesn't come before action. Confidence comes after proof.",
+      "visualDescription": "Character slowly sits up from lying position. A single small spark of light appears just above the character's head, pulsing gently. Character pushes up and stands for the first time in the video.",
+      "animationCues": [
+        "StickFigure pose interpolation: 'lyingDown' -> 'sittingUp' -> 'standing', spring-based with low damping for a slightly shaky, effortful stand",
+        "Spark: small circle, scale spring in at 40% through scene, gentle bobbing float, soft radial glow filter",
+        "Camera: slow tilt upward following the character's rise",
+        "Shadows in background recede slightly (move 5% further back) to signal the character reclaiming space"
+      ]
+    },
+    {
+      "id": "first_proof",
+      "order": 5,
+      "startSeconds": 75,
+      "endSeconds": 100,
+      "startFrame": 2250,
+      "endFrame": 3000,
+      "component": "Scene05_FirstProof",
+      "moodRange": [0.08, 0.13],
+      "voReference": "The first step is not changing your whole life. The first step is proving to yourself that you still listen to yourself.",
+      "visualDescription": "Character makes the bed (smooths a rectangle), picks up one piece of trash and drops it in a bin, then walks to the window and opens the curtains. The room becomes noticeably, but only slightly, cleaner and brighter.",
+      "animationCues": [
+        "RoomScene clutterLevel prop interpolates from 1.0 to 0.8 across the scene",
+        "Three short action beats, each its own pose-interpolation block: 'makeBed', 'pickUpTrash', 'openCurtains'",
+        "Curtain open: two rectangle 'curtain' shapes slide outward on x-axis, revealing brighter light rectangle behind",
+        "Light level (RoomScene.lightLevel) interpolates 0.3 -> 0.45"
+      ]
+    },
+    {
+      "id": "tiny_promise_montage",
+      "order": 6,
+      "startSeconds": 100,
+      "endSeconds": 125,
+      "startFrame": 3000,
+      "endFrame": 3750,
+      "component": "Scene06_TinyPromiseMontage",
+      "moodRange": [0.13, 0.18],
+      "voReference": "Pick one promise so small you almost feel stupid making it. Ten pushups. One walk. One job application. One cleaned corner. One honest conversation.",
+      "visualDescription": "Quick montage of five tiny actions, roughly 5 seconds each, separated by quick cuts/wipes: pushups on the floor, walking past a simple outdoor silhouette, typing on a laptop with a simple form icon, wiping a desk corner clean, sending a message bubble icon to another simple figure.",
+      "animationCues": [
+        "Five child Sequences inside this scene, each ~150 frames, each holding one StickFigure pose loop: 'pushup' (repeating), 'walkCycle', 'typing', 'wipingDesk', 'talking'",
+        "Quick wipe-transition (diagonal clip-path sweep) between each of the five beats, 8 frames long",
+        "Each beat gets one small glowing dot that appears and stays in a row at the bottom of the frame, accumulating left to right, foreshadowing CalendarBlocks"
+      ]
+    },
+    {
+      "id": "calendar_blocks",
+      "order": 7,
+      "startSeconds": 125,
+      "endSeconds": 150,
+      "startFrame": 3750,
+      "endFrame": 4500,
+      "component": "Scene07_CalendarBlocks",
+      "moodRange": [0.18, 0.23],
+      "voReference": "Then do it again tomorrow. Not because it fixes everything. Because it starts rebuilding trust.",
+      "visualDescription": "A calendar made of simple grid blocks appears on the ground plane in front of the character. As days pass (calendar pages flip), one block at a time lights up softly under the character's feet, like floor tiles turning on.",
+      "animationCues": [
+        "CalendarBlocks component: grid of NxM rectangles, prop 'litCount' increases by 1 every ~3.5s",
+        "Each newly-lit block: scale 0->1 spring + warm glow fade-in",
+        "StickFigure pose: 'standingConfidentIdle', slight nod each time a block lights",
+        "Camera: gentle slow zoom out to reveal the growing lit pattern"
+      ]
+    },
+    {
+      "id": "money_visible",
+      "order": 8,
+      "startSeconds": 150,
+      "endSeconds": 175,
+      "startFrame": 4500,
+      "endFrame": 5250,
+      "component": "Scene08_MoneyVisible",
+      "moodRange": [0.23, 0.28],
+      "voReference": "If your excuse is money, start by making the invisible visible. Write down what comes in, what goes out, and what is bleeding you every month.",
+      "visualDescription": "Character sits at a simple table with blank rectangular paper shapes. Simple coin shapes flow in from one side and out the other. A leaking bucket sits beside the table with a small stream of coins dripping from a crack; the character patches the crack with a small patch shape, no written numbers anywhere.",
+      "animationCues": [
+        "MoneyLeakBucket component: looping drip particles (small circles) falling from a crack rect, count decreasing as 'patched' prop goes true",
+        "Coin flow: two opposite-direction particle streams (in/out) along bezier-like paths using interpolate on a path string",
+        "StickFigure pose: 'sittingAtTable', arm-reach pose for placing the patch at ~70% through scene",
+        "On patch applied: leak particle emission rate drops to near-zero, small relief glow pulse on the character"
+      ]
+    },
+    {
+      "id": "plan_beats_panic",
+      "order": 9,
+      "startSeconds": 175,
+      "endSeconds": 200,
+      "startFrame": 5250,
+      "endFrame": 6000,
+      "component": "Scene09_PlanBeatsPanic",
+      "moodRange": [0.28, 0.33],
+      "voReference": "You don't need to become rich this week. You need to stop being blind. A plan beats panic.",
+      "visualDescription": "A dark storm cloud hovering over the character shrinks steadily. As it shrinks, a simple winding path/line appears glowing on the floor leading off into the distance.",
+      "animationCues": [
+        "StormCloud shape: scale interpolates 1.0 -> 0.3, opacity 0.9 -> 0.3",
+        "Path: SVG path 'pathLength' stroke-dasharray trick animates the line drawing itself across the floor",
+        "StickFigure pose: 'standingLookingForward', subtle shoulder relax (rotation easing) as cloud shrinks",
+        "Lighting: ambient light level +0.05 by scene end"
+      ]
+    },
+    {
+      "id": "body_habits",
+      "order": 10,
+      "startSeconds": 200,
+      "endSeconds": 225,
+      "startFrame": 6000,
+      "endFrame": 6750,
+      "component": "Scene10_BodyHabits",
+      "moodRange": [0.33, 0.38],
+      "voReference": "If your excuse is your body, stop trying to hate yourself into a new one. Walk. Lift. Eat more protein. Sleep like it matters.",
+      "visualDescription": "Four quick beats: character walks across frame, lifts a simple dumbbell shape overhead, eats from a simple bowl/plate shape, and turns off a glowing phone before lying down to sleep in a dim room. Posture is visibly a little straighter after each beat.",
+      "animationCues": [
+        "Four Sequences ~187 frames each with quick crossfade (10 frame) between them",
+        "StickFigure poses: 'walkCycle' -> 'overheadLift' (with dumbbell prop attached to hands) -> 'eatingSeated' -> 'turnOffPhoneLieDown'",
+        "Spine-curve parameter on StickFigure (see components/StickFigure.tsx postureBend prop) interpolates from 0.25 to 0.12 across the four beats - this is the subtle posture improvement",
+        "Phone glow shuts off abruptly (opacity step to 0) on the last beat, room dims to a calm dark-blue tone for sleep"
+      ]
+    },
+    {
+      "id": "mirror_taller",
+      "order": 11,
+      "startSeconds": 225,
+      "endSeconds": 245,
+      "startFrame": 6750,
+      "endFrame": 7350,
+      "component": "Scene11_MirrorTaller",
+      "moodRange": [0.38, 0.42],
+      "voReference": "You don't need the perfect body to start living. You need a body you keep promises to.",
+      "visualDescription": "Character stands in front of a simple framed mirror shape. The reflection inside the mirror stands very slightly taller and straighter than the real character outside the frame. Character notices and gives one small nod.",
+      "animationCues": [
+        "MirrorScene component: real StickFigure outside frame at postureBend 0.12, reflected StickFigure inside frame mirrored on x-axis with postureBend 0.05 and scaleY +3%",
+        "Reflection appears with a soft shimmer wipe (mirror 'activates') in the first 20 frames",
+        "StickFigure head pose: single nod keyframe at ~80% through scene (rotationZ -4deg -> 0deg, spring)"
+      ]
+    },
+    {
+      "id": "heartbreak_light",
+      "order": 12,
+      "startSeconds": 245,
+      "endSeconds": 270,
+      "startFrame": 7350,
+      "endFrame": 8100,
+      "component": "Scene12_HeartbreakLight",
+      "moodRange": [0.42, 0.46],
+      "voReference": "If your excuse is heartbreak, remember this: pain is real, but it is not permission to disappear.",
+      "visualDescription": "Character holds a cracked heart-shaped outline that initially hangs low and heavy, dragging behind the body like a weight on a chain. Slowly the heart shape rises and shrinks slightly, becoming a small soft light carried inside the chest instead.",
+      "animationCues": [
+        "HeartShape: starts as larger outline (scale 1.3) attached by a thin chain-line to the character's back, dragging with a lag/spring follow (delayed position interpolation)",
+        "Midway, chain-line opacity fades to 0 and heart shape animates (spring) to a small glowing position centered on the character's chest, scale down to 0.4",
+        "StickFigure pose: 'carryingWeightBehind' -> 'standingHandOnChest'",
+        "Background desaturation slightly reduced (mood ticking up) but kept subdued - this scene should not look 'happy', just steady"
+      ]
+    },
+    {
+      "id": "move_anyway",
+      "order": 13,
+      "startSeconds": 270,
+      "endSeconds": 295,
+      "startFrame": 8100,
+      "endFrame": 8850,
+      "component": "Scene13_MoveAnyway",
+      "moodRange": [0.46, 0.51],
+      "voReference": "Let it hurt. Then move anyway. Shower. Walk. Call someone. Build one day that doesn't revolve around the person who left.",
+      "visualDescription": "Four quick beats: character showers behind a simple frosted silhouette panel, walks outside under open sky, holds up a simple phone-call bubble icon to their ear, and finally sits calmly in a patch of warm sunlight.",
+      "animationCues": [
+        "Four Sequences ~187 frames each, simple crossfade between",
+        "StickFigure poses: 'showering' (steam particles, simple wavy lines) -> 'walkCycle' -> 'phoneCallPose' (speech-bubble icon prop, no words inside, just a simple wavy soundline icon) -> 'sittingInSun'",
+        "Sunlight beat: warm radial gradient overlay fades in, first appearance of true warm light in the video"
+      ]
+    },
+    {
+      "id": "doors",
+      "order": 14,
+      "startSeconds": 295,
+      "endSeconds": 320,
+      "startFrame": 8850,
+      "endFrame": 9600,
+      "component": "Scene14_Doors",
+      "moodRange": [0.51, 0.55],
+      "voReference": "If your excuse is no direction, stop asking for a perfect purpose. Pick a useful direction and move.",
+      "visualDescription": "Character stands facing a row of five identical plain doors. After a beat of looking across all of them, the character walks to one ordinary, unremarkable door (not a glowing 'special' one) and opens it, stepping through into soft light.",
+      "animationCues": [
+        "DoorChoice component: array of 5 door rectangles, camera does a slow pan across all 5 first",
+        "StickFigure pose: 'lookingSideToSide' (head turn loop) -> 'walkCycle' toward door index 2 (middle-ish, deliberately unremarkable) -> 'openDoor' -> 'stepThrough'",
+        "Light spills from the opened door, brief whiteout-to-scene transition (12 frame cross dissolve) into next scene's brighter palette"
+      ]
+    },
+    {
+      "id": "try_things",
+      "order": 15,
+      "startSeconds": 320,
+      "endSeconds": 345,
+      "startFrame": 9600,
+      "endFrame": 10350,
+      "component": "Scene15_TryThings",
+      "moodRange": [0.55, 0.59],
+      "voReference": "You find yourself by doing things. Not by thinking about yourself forever.",
+      "visualDescription": "Quick succession of the character trying five different simple activities in the same space, set changing subtly each time: working at a laptop, exercising, reading a simple blank book shape, helping another simple stick figure carry something, building/stacking simple blocks.",
+      "animationCues": [
+        "Five Sequences ~150 frames, quick match-cut style (no long transition, just a 6-frame cross dissolve) to keep pace energetic",
+        "Poses: 'typing', 'pushup' or 'squat', 'readingSeated', 'helpingCarry' (second simple StickFigure NPC), 'stackingBlocks'",
+        "A second, simpler/smaller StickFigure (no facial detail, just silhouette) appears only in the 'helpingCarry' beat"
+      ]
+    },
+    {
+      "id": "phone_shrink",
+      "order": 16,
+      "startSeconds": 345,
+      "endSeconds": 365,
+      "startFrame": 10350,
+      "endFrame": 10950,
+      "component": "Scene16_PhoneShrink",
+      "moodRange": [0.59, 0.62],
+      "voReference": "If your excuse is no time, check your screen time before you say that.",
+      "visualDescription": "A giant glowing phone screen looms over the character, oversized and dominating the frame. The character reaches up, and the phone shrinks down to a small normal handheld size, which is then placed into a drawer that closes.",
+      "animationCues": [
+        "PhoneDistraction component scale prop: starts at 4.0 (towering), spring-interpolates down to 1.0 on character's reach gesture at ~50% through scene",
+        "Drawer: simple rectangle slides open then closed (translateY), phone placed inside, glow cut off as drawer shuts",
+        "StickFigure pose: 'reachingUp' -> 'placingDownObject' -> 'standingRelieved'"
+      ]
+    },
+    {
+      "id": "time_block_shield",
+      "order": 17,
+      "startSeconds": 365,
+      "endSeconds": 390,
+      "startFrame": 10950,
+      "endFrame": 11700,
+      "component": "Scene17_TimeBlockShield",
+      "moodRange": [0.62, 0.66],
+      "voReference": "You don't need eight free hours. You need twenty honest minutes, protected like your future depends on it.",
+      "visualDescription": "A single calendar block glows brightly on a small calendar grid in front of the character. Small distraction icons (phone, notification dot, chat bubble) bounce toward it but deflect off a faint circular shield shape the character holds up around the block.",
+      "animationCues": [
+        "CalendarBlocks: single highlighted block, pulsing glow loop (sine-based scale 1.0-1.05)",
+        "Shield: semi-transparent circle/arc shape, faint stroke, positioned around the glowing block",
+        "3-4 small distraction icons animate in from frame edges toward the block then bounce outward (simple reflect easing) on shield contact",
+        "StickFigure pose: 'standingGuard', arms slightly raised in a protective stance"
+      ]
+    },
+    {
+      "id": "backpack_help",
+      "order": 18,
+      "startSeconds": 390,
+      "endSeconds": 415,
+      "startFrame": 11700,
+      "endFrame": 12450,
+      "component": "Scene18_BackpackHelp",
+      "moodRange": [0.66, 0.7],
+      "voReference": "And if your mind is heavy, don't pretend it isn't. Get help. Talk to someone. Remove the shame from needing support.",
+      "visualDescription": "Character walks hunched under a visibly heavy, oversized backpack with two straps. A second simple stick figure enters from the side and gently takes hold of one strap, lifting it. The main character's posture eases noticeably.",
+      "animationCues": [
+        "Backpack: oversized rounded rectangle prop attached to StickFigure back, scale tied to postureBend (heavier pack = postureBend closer to 0.3)",
+        "Second StickFigure (helper) walks in on a simple walkCycle, then holds pose 'liftingStrap'",
+        "Main StickFigure postureBend interpolates from 0.3 down to 0.15 once the helper grabs the strap (spring)",
+        "Backpack scale shrinks slightly (0.85x) once shared, signalling the load is lighter"
+      ]
+    },
+    {
+      "id": "staircase_votes",
+      "order": 19,
+      "startSeconds": 415,
+      "endSeconds": 440,
+      "startFrame": 12450,
+      "endFrame": 13200,
+      "component": "Scene19_StaircaseVotes",
+      "moodRange": [0.7, 0.78],
+      "voReference": "Getting your life together is not one giant transformation. It is a hundred small votes for the person you're becoming.",
+      "visualDescription": "Every small glowing dot/action from earlier scenes (pushup, walk, job form, cleaned corner, message, calendar blocks, patched bucket, mirror nod, sunlight, door, helped carry, shield block, lifted strap) reappears as small floating dots that drift together and connect into the shape of a rising staircase. The character begins climbing it.",
+      "animationCues": [
+        "StaircaseOfWins component: ~14 dot markers fly in from scattered positions (each tagged with the scene id it came from, for code readability) and snap into staircase-step positions, staggered spring entrance",
+        "Once assembled, dots morph into solid glowing step rectangles (cross-fade dot opacity 1->0 while step rectangle opacity 0->1)",
+        "StickFigure pose: 'walkUpStairs' cycle, climbing in sync with camera slow upward pan"
+      ]
+    },
+    {
+      "id": "world_brighter",
+      "order": 20,
+      "startSeconds": 440,
+      "endSeconds": 465,
+      "startFrame": 13200,
+      "endFrame": 13950,
+      "component": "Scene20_WorldBrighter",
+      "moodRange": [0.78, 0.92],
+      "voReference": "One day, your room is cleaner. Your body is stronger. Your money is less confusing. Your mind is quieter. And you realize you didn't change all at once.",
+      "visualDescription": "A wide view of the now-clean, bright room from the very first scene, redressed: no clutter, open curtains, full daylight. Character stands tall in the center with clearly improved posture. The winding path from earlier scenes is visible leading toward a doorway full of light.",
+      "animationCues": [
+        "RoomScene clutterLevel now at 0.05, lightLevel at 0.85 (compare to Scene01 clutterLevel 1.0 / lightLevel 0.3 - same component, different props, for visual payoff)",
+        "StickFigure postureBend at its minimum value (0.05) for the whole video so far",
+        "Camera: slow steady dolly-back to reveal the full clean room width",
+        "Color grade (utils/colors.ts moodProgress ~0.85): warm neutral palette, soft long shadows"
+      ]
+    },
+    {
+      "id": "sunrise_final",
+      "order": 21,
+      "startSeconds": 465,
+      "endSeconds": 480,
+      "startFrame": 13950,
+      "endFrame": 14400,
+      "component": "Scene21_SunriseFinal",
+      "moodRange": [0.92, 1.0],
+      "voReference": "You changed because you stopped abandoning yourself.",
+      "visualDescription": "Character walks forward along a glowing path toward a rising sun. The original tired silhouette from Scene 1 briefly appears walking behind the character, faded and translucent, then dissolves entirely. Final frame: character standing tall, facing a full sunrise, alone, composed. No text.",
+      "animationCues": [
+        "SunriseEnding component: large sun circle rises from horizonY across the scene, warm gradient sky interpolating through sunrise colors",
+        "Ghost silhouette: low-opacity (0.25) copy of StickFigure with original Scene01 'slumpedFloor'-derived walk, trailing behind, opacity interpolates to 0 by 70% through scene and is then removed",
+        "Main StickFigure pose: 'walkCycle' with postureBend 0.05, then settles into 'standingTallFinal' for the last 60 frames",
+        "Final hold: 30 frame still hold on the last pose before video ends, no fade to black (ends on the image, captions/voiceover will be layered later in CapCut)"
+      ]
+    }
+  ],
+  "transitions": {
+    "default": {
+      "type": "crossfade",
+      "durationFrames": 15,
+      "note": "Applied between every top-level scene in src/Video.tsx via a manual opacity-fade wrapper. Override per-scene by adding a 'transitionOverrideFrames' field to a scene object above."
+    }
+  },
+  "globalNotes": [
+    "moodProgress is NOT just the moodRange of the current scene - it is continuously interpolated across the ENTIRE timeline using all scene moodRange breakpoints, so color shifts never jump at cuts.",
+    "All scene components live in src/scenes/ and are named exactly as the 'component' field above. src/Video.tsx imports this file directly and maps id -> component via src/scenes/index.ts.",
+    "To change total video length, edit the seconds values in this file (keep them contiguous, no gaps). src/timeline.ts derives startFrame/endFrame from fps + seconds at import time, so frame numbers always stay correct even if you only edit seconds."
+  ]
+}

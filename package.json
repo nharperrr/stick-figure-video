@@ -1,0 +1,25 @@
+{
+  "name": "stick-figure-life-together",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Silent animated stick-figure motivational video: How to Get Your Life Together at Any Age",
+  "scripts": {
+    "dev": "remotion studio",
+    "preview": "remotion studio",
+    "render": "remotion render src/index.ts MainVideo out/how-to-get-your-life-together.mp4",
+    "render:vertical": "remotion render src/index.ts MainVideoVertical out/how-to-get-your-life-together-vertical.mp4",
+    "still": "remotion still src/index.ts MainVideo out/still.png",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "remotion": "4.0.479",
+    "@remotion/cli": "4.0.479"
+  },
+  "devDependencies": {
+    "@types/react": "18.3.1",
+    "@types/react-dom": "18.3.1",
+    "typescript": "5.5.4"
+  }
+}
